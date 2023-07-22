@@ -1,0 +1,68 @@
+.JoinPage{
+    background-image: url('../../images/wv.jpg');
+    background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.JoinContainer{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.JoinContainer > img{
+    /* background-color: rgb(250, 11, 11); */
+    width: 10vmax;
+    border-radius: 50px;
+    /* height:11vmax; */
+    margin-bottom: -4%;
+}
+.JoinContainer > h1{
+    color: rgba(6, 247, 214, 0.76);
+    font-size: 2.45vmax;
+    width: 25vmax;
+    border-bottom: 0.09vmax solid rgb(208, 20, 255);
+    text-align: center;
+    padding: 1vmax;
+    font-family: "Roboto";
+    /* margin-bottom: 20%; */
+    box-sizing: border-box;
+}
+
+#joinInput{
+    width: 25vmax;
+    padding: 1.5vmax;
+    border: 0.6px solid rgb(4, 95, 138);
+    outline:auto;
+    border-radius: 12%;
+    font-size: 1.2vmax;
+    margin: 2vmax;
+    box-sizing: border-box;
+}
+.joinbtn{
+    width: 16vmax;
+    padding: 1.2vmax;
+    border: 2.6px solid green;
+    color: rgb(177, 9, 9);
+    font-family: "Roboto";
+    outline: none;
+    font-size: 1.84vmax;
+    font-weight: bolder;
+    border-radius: 50px;
+    background-color: rgba(183, 235, 255, 0.877);
+    box-sizing: border-box;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+.joinbtn:hover{
+    background-color: rgb(107, 57, 57);
+    color: rgba(15, 186, 238, 0.877) ;
+    border: 2.6px solid rgb(245, 0, 0);
+}

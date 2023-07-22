@@ -1,0 +1,118 @@
+.chatPage{
+    overflow: hidden;
+    /* background-position: ; */
+ background-image:url('../../images/wall.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chatContainer{
+    border-radius: 20px;
+    background-image: url('../../images/chat.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 88%;
+    width: 60%;
+}
+
+.header{
+    background-image:url('../../images/head.jpg'); 
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    border:0.7px solid rgb(2, 2, 54);
+    border-radius: 20px 20px 0 0;
+    /* width:98%; */
+    height: 13%;
+    /* margin-left: 1%; */
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.header>h2{
+    font-size: 2.4vmax;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 2.5vmax;
+}
+
+.header img{
+    
+    margin: 2.5vmax;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+.header>img:hover{
+    transform: scale(1.2);
+}
+
+
+.chatBox{
+   
+ height: 79%;
+ box-sizing: border-box;
+ 
+}
+
+.inputBox{
+    background-color: black;
+    /* margin-top: 5.7vh; */
+    height: 8%;
+    box-sizing: border-box;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+   /* align-self: baseline; */
+}
+
+
+#chatInput{
+ color: rgb(255, 255, 255);
+ border-radius: 0 20px 20px 0;
+    width: 84.5%;
+    border: 0.2px solid black;
+    
+    padding: 2vmax;
+    box-sizing: border-box;
+    background-color: rgb(77, 76, 76);
+    outline: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.48vmax;
+    border-top: 0.2vmax solid rgba(41, 41, 41, 0.562);
+}
+
+
+.sendBtn{
+    /* background-color: rgb(32, 199, 54); */
+    background-image: url('../../images/ss.jpg');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: rgb(7, 7, 7);
+    /* margin-top: 1vh; */
+    border: 0.1px solid black;
+    width: 15%;
+    /* height: 100%; */
+    border-radius: 50px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.sendBtn>img{
+    /* color: black; */
+    width: 2.6vmax;
+    filter:brightness(100) invert();
+    transition: all 0.3s;
+}
+.sendBtn:hover{
+    background-color: rgb(32, 199, 54);
+} 
+.sendBtn:hover img{
+    transform: translateX(10px);
+}
