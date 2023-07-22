@@ -9,7 +9,7 @@ import closeIcon from "../../images/close.png";
 
 let socket;
 
-const ENDPOINT = "http://localhost:4000/";
+const ENDPOINT = "https://chatverse-xl8a.onrender.com";
 
 const Chat = () => {
     const [id, setid] = useState("");
@@ -52,7 +52,7 @@ const Chat = () => {
             socket.emit('userDisconnect');
             socket.off();
         }
-    }, [])
+    }, [messages])
 
     useEffect(() => {
         socket.on('sendMessage', (data) => {
