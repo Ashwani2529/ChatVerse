@@ -1,7 +1,9 @@
 const http = require('http');
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const port = process.env.PORT;
+// const port =process.env.PORT || 4500;
+const port=process.env.PORT;
 const socketIO = require('socket.io');
 const app = express();
 app.use(cors());
@@ -24,8 +26,8 @@ io.on("connection", (socket) => { // Pass the socket object as a parameter
     io.emit('sendMessage', { user: users[id], message, id });
   })
 
-  socket.on('userDisconnect', () => {
-    socket.broadcast.emit('leavef', { user: "Ashwani", message: `${users[socket.id]} left` });
+  socket.on('disconnect', () => {
+    socket.broadcast.emit('leave', { user: "Ashwani", message: `${users[socket.id]} left` });
   })
 });
 

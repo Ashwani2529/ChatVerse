@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { user } from "../Join/Join";
 import socketIo from "socket.io-client";
 import "./Chat.css";
@@ -13,7 +13,8 @@ const ENDPOINT = "https://chatverse-xl8a.onrender.com";
 
 const Chat = () => {
     const [id, setid] = useState("");
-    const [messages, setMessages] = useState([])
+    const [messages, setMessages] = useState([]);
+    const [showWelcome, setShowWelcome] = useState(false); // New state for showing welcome message
 
     const send = () => {
         const message = document.getElementById('chatInput').value;
@@ -21,48 +22,47 @@ const Chat = () => {
         document.getElementById('chatInput').value = "";
     }
 
-  
     useEffect(() => {
         socket = socketIo(ENDPOINT, { transports: ['websocket'] });
 
         socket.on('connect', () => {
-            alert('Connected');
+            // alert('Connected');
             setid(socket.id);
 
         })
         console.log(socket);
-        socket.emit('joined', { user })
+        socket.emit('joined', { user });
 
         socket.on('welcome', (data) => {
+            setShowWelcome(true); // Show the welcome message
             setMessages([...messages, data]);
-            
-        })
+        });
 
         socket.on('userJoined', (data) => {
             setMessages([...messages, data]);
-            
-        })
+        });
 
-        socket.on('leavef', (data) => {
+        socket.on('leave', (data) => {
             setMessages([...messages, data]);
-          
-        })
+        });
 
         return () => {
-            socket.emit('userDisconnect');
+            socket.disconnect();
             socket.off();
         }
-    }, [messages])
+        
+    }, 
+    // eslint-disable-next-line
+    [])
 
     useEffect(() => {
         socket.on('sendMessage', (data) => {
             setMessages([...messages, data]);
-           
-        })
+        });
         return () => {
             socket.off();
-        }
-    }, [messages])
+        };
+    }, [messages]);
 
     return (
         <div className="chatPage">
@@ -72,16 +72,16 @@ const Chat = () => {
                     <a href="/"> <img src={closeIcon} alt="Close" /></a>
                 </div>
                 <ReactScrollToBottom className="chatBox">
+                    {showWelcome && <Message user="Ashwani: " message={`Welcome to the ChatVerse, ${user}`} />} {/* Show welcome message */}
                     {messages.map((item, i) => <Message user={item.id === id ? '' : item.user} message={item.message} classs={item.id === id ? 'right' : 'left'} />)}
                 </ReactScrollToBottom>
                 <div className="inputBox" id="inputwala">
-                    <input onKeyPress={(event) => event.key === 'Enter' ? send() : null} type="text" id="chatInput" />
+                    <input onKeyDown={(event) => event.key === 'Enter' ? send() : null} type="text" id="chatInput" />
                     <button onClick={send} className="sendBtn"><img src={sendLogo} alt="Send" /></button>
                 </div>
             </div>
-
         </div>
     )   
 }
 
-export default Chat
+export default Chat;
