@@ -10,11 +10,12 @@ import closeIcon from "../../images/close.png";
 let socket;
 
 const ENDPOINT = "https://chatverse-xl8a.onrender.com";
+// const ENDPOINT="http://localhost:4500";
 
 const Chat = () => {
     const [id, setid] = useState("");
     const [messages, setMessages] = useState([]);
-    const [showWelcome, setShowWelcome] = useState(false); // New state for showing welcome message
+    const [showWelcome, setShowWelcome] = useState(false);
 
     const send = () => {
         const message = document.getElementById('chatInput').value;
@@ -26,7 +27,6 @@ const Chat = () => {
         socket = socketIo(ENDPOINT, { transports: ['websocket'] });
 
         socket.on('connect', () => {
-            // alert('Connected');
             setid(socket.id);
 
         })
@@ -34,7 +34,7 @@ const Chat = () => {
         socket.emit('joined', { user });
 
         socket.on('welcome', (data) => {
-            setShowWelcome(true); // Show the welcome message
+            setShowWelcome(false);
             setMessages([...messages, data]);
         });
 
@@ -50,10 +50,10 @@ const Chat = () => {
             socket.disconnect();
             socket.off();
         }
-        
-    }, 
-    // eslint-disable-next-line
-    [])
+
+    },
+        // eslint-disable-next-line
+        [])
 
     useEffect(() => {
         socket.on('sendMessage', (data) => {
@@ -81,7 +81,7 @@ const Chat = () => {
                 </div>
             </div>
         </div>
-    )   
+    )
 }
 
 export default Chat;
