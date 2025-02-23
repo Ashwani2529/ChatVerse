@@ -75,7 +75,7 @@
 #chatInput{
  color: rgb(255, 255, 255);
  border-radius: 0 20px 20px 0;
-    width: 84.5%;
+    width: 89%;
     border: 0.2px solid black;
     
     padding: 2vmax;
@@ -97,7 +97,7 @@
     color: rgb(7, 7, 7);
     /* margin-top: 1vh; */
     border: 0.1px solid black;
-    width: 15%;
+    width: 11%;
     /* height: 100%; */
     border-radius: 50px;
     transition: all 0.3s;
