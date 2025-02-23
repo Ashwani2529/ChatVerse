@@ -10,7 +10,7 @@ import closeIcon from "../../images/close.png";
 let socket;
 
 const ENDPOINT = "https://chatverse-xl8a.onrender.com";
-// const ENDPOINT="http://localhost:4500";
+// const ENDPOINT="http://localhost:4501";
 
 const Chat = () => {
     const [id, setid] = useState("");
