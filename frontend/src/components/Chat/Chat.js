@@ -10,7 +10,7 @@ import { Oval } from "react-loader-spinner";
 let socket;
 
 const ENDPOINT = "https://chatverse-xl8a.onrender.com";
-// const ENDPOINT="http://localhost:4501";
+// const ENDPOINT = "http://localhost:4501";
 
 const Chat = () => {
   const [id, setid] = useState("");
@@ -93,18 +93,26 @@ const Chat = () => {
           ))}
         </ReactScrollToBottom>
         <div className="inputBox" id="inputwala">
-          <input type="text" id="chatInput" />
+          <input
+            type="text"
+            id="chatInput"
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                send();
+              }
+            }}
+          />
           {loader ? (
             <Oval
-            visible={loader}
-            height="50"
-            width="50"
-            color="#4fa94d"
-            ariaLabel="oval-loading"
-            wrapperStyle={{
-                margin: "3px 22px 3px 22px"
-            }}
-            wrapperClass=""
+              visible={loader}
+              height="50"
+              width="50"
+              color="#4fa94d"
+              ariaLabel="oval-loading"
+              wrapperStyle={{
+                margin: "3px 22px 3px 22px",
+              }}
+              wrapperClass=""
             />
           ) : (
             <button onClick={send} className="sendBtn">

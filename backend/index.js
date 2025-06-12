@@ -26,24 +26,29 @@ io.on("connection", (socket) => {
   socket.on('message', async ({ message, id }) => {
     try {
         // Send the message to the Python model server for classification
-        const response = await axios.post('https://hate-speech-model-latest.onrender.com/predict', { text: message });
-        const prediction = response.data.prediction;
-        // Check the prediction value and send a warning if toxic
-        if (prediction === "Toxic") {
-            // Send an announcement to the chat warning the user
-            io.emit('sendMessage', {
-                user: 'System',
-                message: `Warning to ${users[id]}: Please be respectful!`,
-                id: 'system',
-            });
-        } else {
-            // If the message is non-toxic, send it as usual
-            io.emit('sendMessage', {
-                user: users[id],
-                message: message,
-                id,
-            });
-        }
+        // const response = await axios.post('https://hate-speech-model-latest.onrender.com/predict', { text: message });
+        // const prediction = response.data.prediction;
+        // // Check the prediction value and send a warning if toxic
+        // if (prediction === "Toxic") {
+        //     // Send an announcement to the chat warning the user
+        //     io.emit('sendMessage', {
+        //         user: 'System',
+        //         message: `Warning to ${users[id]}: Please be respectful!`,
+        //         id: 'system',
+        //     });
+        // } else {
+        //     // If the message is non-toxic, send it as usual
+        //     io.emit('sendMessage', {
+        //         user: users[id],
+        //         message: message,
+        //         id,
+        //     });
+        // }
+        io.emit('sendMessage', {
+          user: users[id],
+          message: message,
+          id,
+      });
     } catch (error) {
         console.error('Error classifying message:', error);
         io.emit('sendMessage', {
