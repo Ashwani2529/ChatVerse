@@ -6,20 +6,126 @@
     clear: both;
     font-size: 1.2vmax;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 70%;
+    word-wrap: break-word;
+    position: relative;
 }
 
 .right{
     float: right;
-    background-color: crimson;
+    background-color: #007bff;
     color: white;
     text-align: right;
+    border-radius: 18px 18px 5px 18px;
 }
 
 .left{
     font-size: 1.29vmax;
     float: left;
-    border-radius: 19px;
+    border-radius: 18px 18px 18px 5px;
     text-align: left;
     background-color: rgb(196, 255, 184);
+}
+
+/* System messages */
+.system-message {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #666;
+    text-align: center;
+    font-style: italic;
+    border-radius: 20px;
+    margin: 0.5vmax auto;
+    max-width: 80%;
+    clear: both;
+    float: none;
+    display: block;
+    padding: 0.8vmax 1.2vmax;
+    border: 1px solid #ddd;
+}
+
+.system-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3vmax;
+}
+
+.system-text {
+    font-size: 1.1vmax;
+}
+
+/* Message content structure */
+.message-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3vmax;
+}
+
+.message-text {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5vmax;
+    flex-wrap: wrap;
+}
+
+.user-label {
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.message-body {
+    flex: 1;
+    line-height: 1.4;
+}
+
+/* Timestamp styles */
+.timestamp {
+    font-size: 0.8vmax;
+    opacity: 0.7;
+    align-self: flex-end;
+    margin-top: 0.2vmax;
+    font-style: italic;
+}
+
+.right .timestamp {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.left .timestamp {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.system-message .timestamp {
+    color: rgba(102, 102, 102, 0.8);
+    font-size: 0.7vmax;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .messageBox {
+        max-width: 85%;
+        font-size: 3.5vw;
+        padding: 2.5vw;
+        margin: 2vw;
+    }
     
+    .left {
+        font-size: 3.8vw;
+    }
+    
+    .timestamp {
+        font-size: 2.8vw;
+    }
+    
+    .system-message {
+        font-size: 3.2vw;
+        padding: 2vw;
+        max-width: 90%;
+    }
+}
+
+/* Accessibility improvements */
+.messageBox:focus {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
 }
