@@ -97,7 +97,7 @@ npm install
 
 Create a `.env` file in the frontend directory:
 ```env
-REACT_APP_BACKEND_URL=http://localhost:4501
+REACT_APP_BACKEND_URL=https://chatverse-xl8a.onrender.com
 ```
 
 Start the frontend application:
@@ -130,7 +130,7 @@ npm start
 - `TOXICITY_API_URL`: Optional toxicity detection API endpoint
 
 #### Frontend
-- `REACT_APP_BACKEND_URL`: Backend API URL (default: http://localhost:4501)
+- `REACT_APP_BACKEND_URL`: Backend API URL (default: https://chatverse-xl8a.onrender.com)
 
 ## 🚦 Application Features
 
