@@ -1,8 +1,14 @@
 import { render, screen } from '@testing-library/react';
+
 import App from './App';
 
-test('renders learn react link', () => {
+test('shows the room join form when there is no saved session', () => {
+  window.localStorage.clear();
+
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+
+  expect(screen.getByLabelText(/room id/i)).toBeInTheDocument();
+  expect(screen.getByLabelText(/room password/i)).toBeInTheDocument();
+  expect(screen.getByLabelText(/your name/i)).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /enter room/i })).toBeInTheDocument();
 });
