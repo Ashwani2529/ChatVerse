@@ -5,6 +5,7 @@ const Message = require('../models/Message');
 const { verifyToken } = require('../utils/token');
 const { validateMessage } = require('../utils/validate');
 const { serializeMessage } = require('../utils/serialize');
+const { notifyRoom } = require('../services/push');
 const presence = require('./presence');
 
 // Simple per-socket burst limit: 10 messages per 10 seconds.
@@ -125,6 +126,15 @@ const attachSocket = (server, corsOrigins) => {
         // clientId lets the sender swap its optimistic bubble for the saved one.
         io.to(channel).emit('message:new', { ...message, clientId: payload?.clientId });
         if (typeof ack === 'function') ack({ ok: true, message });
+
+        // Push only reaches members with no live socket. Anyone still connected
+        // gets notified by their own page, which knows whether they are looking
+        // at the room — so push never duplicates an in-tab notification.
+        notifyRoom({
+          message,
+          roomDisplayName: socket.data.roomName,
+          skipMemberIds: presence.connectedMemberIds(roomId),
+        }).catch((error) => console.error('Push dispatch failed:', error));
       } catch (error) {
         console.error('Failed to save message:', error);
         const message = 'Failed to send message. Please try again.';

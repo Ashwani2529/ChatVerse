@@ -12,6 +12,8 @@ const mongoose = require('mongoose');
 const connectDB = require('./src/config/db');
 const authRoutes = require('./src/routes/auth');
 const roomRoutes = require('./src/routes/rooms');
+const pushRoutes = require('./src/routes/push');
+const pushService = require('./src/services/push');
 const { attachSocket, presence } = require('./src/socket');
 const { TOKEN_DAYS } = require('./src/utils/token');
 
@@ -47,6 +49,7 @@ app.get('/', (req, res) => {
     port,
     database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
     liveConnections: presence.totalConnections(),
+    pushNotifications: pushService.isConfigured ? 'enabled' : 'disabled',
     tokenLifetimeDays: TOKEN_DAYS,
     timestamp: new Date().toISOString(),
   });
@@ -54,6 +57,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/rooms', roomRoutes);
+app.use('/api/push', pushRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ error: `No route for ${req.method} ${req.originalUrl}` });

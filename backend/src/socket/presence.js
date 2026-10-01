@@ -46,6 +46,17 @@ const listRoom = (roomId) => {
     .sort((a, b) => a.name.localeCompare(b.name));
 };
 
+/**
+ * Members with at least one live socket in the room. These are skipped when
+ * sending push, because their own page raises the notification instead.
+ */
+const connectedMemberIds = (roomId) => {
+  const members = rooms.get(roomId);
+  if (!members) return [];
+
+  return Array.from(members.keys());
+};
+
 const totalConnections = () => {
   let total = 0;
   rooms.forEach((members) => {
@@ -56,4 +67,10 @@ const totalConnections = () => {
   return total;
 };
 
-module.exports = { addSocket, removeSocket, listRoom, totalConnections };
+module.exports = {
+  addSocket,
+  removeSocket,
+  listRoom,
+  connectedMemberIds,
+  totalConnections,
+};

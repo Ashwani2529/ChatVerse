@@ -69,6 +69,22 @@ export const AlertIcon = (props) => (
   </svg>
 );
 
+export const BellIcon = (props) => (
+  <svg {...base} {...props}>
+    <path d="M6 9.5a6 6 0 0 1 12 0c0 3.2.7 5 1.5 6H4.5C5.3 14.5 6 12.7 6 9.5Z" />
+    <path d="M10 19a2 2 0 0 0 4 0" />
+  </svg>
+);
+
+export const BellOffIcon = (props) => (
+  <svg {...base} {...props}>
+    <path d="M4 4l16 16" />
+    <path d="M8.2 6.1A6 6 0 0 1 18 9.5c0 3.2.7 5 1.5 6H9" />
+    <path d="M6.1 10.3c-.1 2.7-.8 4.3-1.6 5.2H6" />
+    <path d="M10 19a2 2 0 0 0 4 0" />
+  </svg>
+);
+
 export const RetryIcon = (props) => (
   <svg {...base} {...props}>
     <path d="M20 11.5a8 8 0 1 1-2.6-5.4" />

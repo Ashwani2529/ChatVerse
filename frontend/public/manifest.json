@@ -1,14 +1,15 @@
 {
   "short_name": "ChatVerse",
-  "name": "Chat Verse",
+  "name": "ChatVerse — private chat rooms",
+  "description": "Password-protected chat rooms with saved history.",
   "icons": [
     {
-      "src": "logo512.png",
+      "src": "favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "logo512.png",
+      "src": "logo192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
@@ -16,10 +17,17 @@
       "src": "logo512.png",
       "type": "image/png",
       "sizes": "512x512"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
     }
   ],
-  "start_url": ".",
+  "start_url": "/chat",
+  "scope": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#0a0b10",
+  "background_color": "#0a0b10"
 }

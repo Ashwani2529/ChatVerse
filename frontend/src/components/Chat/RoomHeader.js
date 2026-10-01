@@ -1,7 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { avatarTint, initials } from '../../lib/datetime';
-import { HashIcon, LogoutIcon, UsersIcon } from '../ui/icons';
+import {
+  BellIcon,
+  BellOffIcon,
+  HashIcon,
+  LogoutIcon,
+  UsersIcon,
+} from '../ui/icons';
 
 const statusStyles = {
   online: { dot: 'bg-emerald-400', label: 'Connected' },
@@ -9,7 +15,16 @@ const statusStyles = {
   offline: { dot: 'bg-rose-400', label: 'Offline' },
 };
 
-const RoomHeader = ({ room, user, online, status, onLeave }) => {
+const RoomHeader = ({
+  room,
+  user,
+  online,
+  status,
+  onLeave,
+  isMuted,
+  onToggleMute,
+  canToggleMute,
+}) => {
   const [showMembers, setShowMembers] = useState(false);
   const popoverRef = useRef(null);
 
@@ -57,6 +72,23 @@ const RoomHeader = ({ room, user, online, status, onLeave }) => {
           </span>
         </p>
       </div>
+
+      {canToggleMute && (
+        <button
+          type="button"
+          onClick={onToggleMute}
+          className="icon-btn"
+          aria-label={isMuted ? 'Turn notifications on' : 'Mute notifications'}
+          aria-pressed={isMuted}
+          title={isMuted ? 'Notifications muted' : 'Notifications on'}
+        >
+          {isMuted ? (
+            <BellOffIcon className="h-5 w-5 text-slate-500" />
+          ) : (
+            <BellIcon className="h-5 w-5" />
+          )}
+        </button>
+      )}
 
       <div className="relative" ref={popoverRef}>
         <button

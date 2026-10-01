@@ -12,7 +12,7 @@ const makeClientId = () =>
  * Owns the room's message state: the first history page, scroll-up pagination,
  * the live socket feed, presence and typing.
  */
-export const useChatSocket = ({ token, room, user, onAuthFailure }) => {
+export const useChatSocket = ({ token, room, user, onAuthFailure, onIncoming }) => {
   const [messages, setMessages] = useState([]);
   const [isLoadingHistory, setIsLoadingHistory] = useState(true);
   const [isLoadingOlder, setIsLoadingOlder] = useState(false);
@@ -27,10 +27,15 @@ export const useChatSocket = ({ token, room, user, onAuthFailure }) => {
   const typingTimersRef = useRef(new Map());
   const typingSentAtRef = useRef(0);
   const authFailureRef = useRef(onAuthFailure);
+  const incomingRef = useRef(onIncoming);
+  const memberIdRef = useRef(user?.memberId);
 
+  // Kept in refs so changing a callback never tears down the live socket.
   useEffect(() => {
     authFailureRef.current = onAuthFailure;
-  }, [onAuthFailure]);
+    incomingRef.current = onIncoming;
+    memberIdRef.current = user?.memberId;
+  }, [onAuthFailure, onIncoming, user]);
 
   const roomId = room?.roomId;
 
@@ -165,7 +170,14 @@ export const useChatSocket = ({ token, room, user, onAuthFailure }) => {
 
     socket.on('presence', (data) => setOnline(data.online || []));
 
-    socket.on('message:new', mergeIncoming);
+    socket.on('message:new', (message) => {
+      mergeIncoming(message);
+
+      // Only other people's messages are worth alerting about.
+      if (message.memberId !== memberIdRef.current) {
+        incomingRef.current?.(message);
+      }
+    });
 
     socket.on('system', (data) => {
       setMessages((prev) => [

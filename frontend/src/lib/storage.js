@@ -1,6 +1,7 @@
 const TOKEN_KEY = 'chatverse.token';
 const EXPIRY_KEY = 'chatverse.token.expiresAt';
 const PREFILL_KEY = 'chatverse.prefill';
+const NOTIFY_KEY = 'chatverse.notifications';
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
@@ -67,4 +68,18 @@ export const loadPrefill = () => {
   } catch {
     return {};
   }
+};
+
+const DEFAULT_NOTIFY_PREFS = { muted: false, bannerDismissed: false };
+
+export const loadNotificationPrefs = () => {
+  try {
+    return { ...DEFAULT_NOTIFY_PREFS, ...(JSON.parse(safeGet(NOTIFY_KEY)) || {}) };
+  } catch {
+    return { ...DEFAULT_NOTIFY_PREFS };
+  }
+};
+
+export const saveNotificationPrefs = (prefs) => {
+  safeSet(NOTIFY_KEY, JSON.stringify({ ...loadNotificationPrefs(), ...prefs }));
 };

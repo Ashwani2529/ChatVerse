@@ -69,6 +69,14 @@ export const joinRoom = ({ roomId, password, name }) =>
 
 export const fetchSession = () => request('/api/auth/me');
 
+export const getPushPublicKey = () => request('/api/push/public-key', { auth: false });
+
+export const savePushSubscription = (subscription) =>
+  request('/api/push/subscribe', { method: 'POST', body: { subscription } });
+
+export const removePushSubscription = (endpoint) =>
+  request('/api/push/unsubscribe', { method: 'POST', body: { endpoint } });
+
 export const fetchMessages = ({ roomId, before, limit = 50 }) => {
   const params = new URLSearchParams({ limit: String(limit) });
   if (before) params.set('before', before);

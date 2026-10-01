@@ -2,3 +2,11 @@
 from = "/*"
 to = "/"
 status= 200
+
+# Never serve a stale worker — a cached sw.js would keep pushing with old logic
+# long after a deploy. Existing files still win over the SPA redirect above.
+[[headers]]
+for = "/sw.js"
+  [headers.values]
+  Cache-Control = "public, max-age=0, must-revalidate"
+  Service-Worker-Allowed = "/"
