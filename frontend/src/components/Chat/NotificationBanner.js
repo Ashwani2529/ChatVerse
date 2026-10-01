@@ -13,7 +13,6 @@ const NotificationBanner = ({ onEnable, onDismiss, isEnabling }) => (
 
     <p className="min-w-0 flex-1 text-slate-200">
       Get notified when someone messages this room
-      <span className="hidden text-slate-400 sm:inline"> — even with the tab closed.</span>
     </p>
 
     <div className="flex shrink-0 items-center gap-2">

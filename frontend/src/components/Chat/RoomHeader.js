@@ -50,8 +50,10 @@ const RoomHeader = ({
 
   const indicator = statusStyles[status] || statusStyles.connecting;
 
+  // `backdrop-blur` makes the header a stacking context, so it needs its own
+  // z-index — otherwise the member popover is trapped below the message list.
   return (
-    <header className="flex items-center gap-3 border-b border-ink-500/70 bg-ink-800/90 px-3 py-2.5 backdrop-blur sm:px-5 sm:py-3">
+    <header className="relative z-30 flex items-center gap-3 border-b border-ink-500/70 bg-ink-800/90 px-3 py-2.5 backdrop-blur sm:px-5 sm:py-3">
       <span
         aria-hidden
         className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-500/20 text-brand-300"

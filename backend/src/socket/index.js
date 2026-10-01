@@ -85,12 +85,6 @@ const attachSocket = (server, corsOrigins) => {
 
     // Join/leave notices are live-only; they are deliberately not persisted so
     // reopening a room shows conversation, not a log of comings and goings.
-    if (isFirstSocket) {
-      socket.to(channel).emit('system', {
-        text: `${name} joined the room`,
-        at: new Date().toISOString(),
-      });
-    }
 
     io.to(channel).emit('presence', { online: presence.listRoom(roomId) });
 
@@ -151,10 +145,6 @@ const attachSocket = (server, corsOrigins) => {
       const { isLastSocket } = presence.removeSocket(roomId, memberId, socket.id);
 
       if (isLastSocket) {
-        socket.to(channel).emit('system', {
-          text: `${name} left the room`,
-          at: new Date().toISOString(),
-        });
         socket.to(channel).emit('typing', { memberId, name, isTyping: false });
       }
 
